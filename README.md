@@ -1,5 +1,7 @@
 # sdkjs-plugins
-一键汉化脚本
+一键汉化
 ```
-sh -c "$(curl -kfsSl https://raw.githubusercontent.com/eysp/sdkjs-plugins/main/install.sh)"
+cd /opt
+curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz
+cp -rf sdkjs-plugins-sdkjs-plugins/* $name/sdkjs-plugins/*
 ```
