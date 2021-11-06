@@ -2,7 +2,7 @@
 red='\033[0;31m'
 plain='\033[0m'
 #默认安装目录
-dir=/var/www/onlyoffice/documentserver
+name=/var/www/onlyoffice/documentserver
 #默认下载目录
 down=/opt
 
@@ -12,11 +12,13 @@ cd $down
 
 curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz       
 mv sdkjs-plugins-sdkjs-plugins sdkjs-plugins
-echo -e "安装目录：${red} \n（docker版直接回车，默认目录$dir）\n"
+echo -e "安装目录：${red} \n（docker版直接回车，默认目录$name）\n"
 read -p "直接回车，apt等方式安装的自己查找目录输入${plain}" webdir
-#    if [[ ! -n "$webdir" ]]; then
-#        webdir=$dir
-#    fi
+read -p "输入目录名（留空默认：$name）: " webdir
+echo -e "${plain}"
+    if [[ ! -n "$webdir" ]]; then
+        webdir=$name
+    fi
 cp -rf  sdkjs-plugins $webdir
 
     if [[ ! -n "$webdir/sdkjs-plugins/README.md" ]]; then
