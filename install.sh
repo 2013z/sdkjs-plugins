@@ -1,6 +1,6 @@
 #!/bin/bash
-red='\033[0;31m'
-plain='\033[0m'
+#red='\033[0;31m'
+#plain='\033[0m'
 #默认安装目录
 name=/var/www/onlyoffice/documentserver
 #默认下载目录
