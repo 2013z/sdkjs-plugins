@@ -1,21 +1,21 @@
 #!/bin/bash
-#red='\033[0;31m'
-#plain='\033[0m'
+red='\033[0;31m'
+plain='\033[0m'
 #默认安装目录
 name=/var/www/onlyoffice/documentserver
 #默认下载目录
 down=/opt
 
 [[ $EUID -ne 0 ]] && echo -e "${red}错误: ${plain} 必须使用root用户运行此脚本！\n" && exit 1
-
+echo -e "${plain}"
 cd $down
 
 curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz       
 mv sdkjs-plugins-sdkjs-plugins sdkjs-plugins
 echo -e "安装目录：${red} \n（docker版直接回车，默认目录$name）\n"
 read -p "直接回车，apt等方式安装的自己查找目录输入${plain}" webdir
-read -p "输入目录名（留空默认：$name）: " webdir
-echo -e "${plain}"
+read -p "输入目录名 留空默认：$name" webdir
+
     if [[ ! -n "$webdir" ]]; then
         webdir=$name
     fi
