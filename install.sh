@@ -8,7 +8,7 @@ cd /opt/
 curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz
     if [[ ! -n "sdkjs-plugins-sdkjs-plugins" ]]; then
     echo "${red}下载汉化文件失败，请检查网络" 
-    read -s
+#    read -s
     fi       
 mv sdkjs-plugins-sdkjs-plugins sdkjs-plugins
 echo -e "输入汉化文件安装目录：${red} \n（docker版直接回车，默认目录$dir）\n"
