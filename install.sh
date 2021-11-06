@@ -1,20 +1,20 @@
 #!/bin/bash
 red='\033[0;31m'
 plain='\033[0m'
-#Ä¬ÈÏ°²×°Ä¿Â¼
+#é»˜è®¤å®‰è£…ç›®å½•
 name=/var/www/onlyoffice/documentserver
-#Ä¬ÈÏÏÂÔØÄ¿Â¼
+#é»˜è®¤ä¸‹è½½ç›®å½•
 down=/opt
 
-[[ $EUID -ne 0 ]] && echo -e "${red}´íÎó: ${plain} ±ØĞëÊ¹ÓÃrootÓÃ»§ÔËĞĞ´Ë½Å±¾£¡\n" && exit 1
+[[ $EUID -ne 0 ]] && echo -e "${red}é”™è¯¯: ${plain} å¿…é¡»ä½¿ç”¨rootç”¨æˆ·è¿è¡Œæ­¤è„šæœ¬ï¼\n" && exit 1
 echo -e "${plain}"
 cd $down
 
 curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz       
 mv sdkjs-plugins-sdkjs-plugins sdkjs-plugins
-echo -e "°²×°Ä¿Â¼£º${red} \n£¨docker°æÖ±½Ó»Ø³µ£¬Ä¬ÈÏÄ¿Â¼$name£©\n"
-read -p "Ö±½Ó»Ø³µ£¬aptµÈ·½Ê½°²×°µÄ×Ô¼º²éÕÒÄ¿Â¼ÊäÈë${plain}" webdir
-read -p "ÊäÈëÄ¿Â¼Ãû Áô¿ÕÄ¬ÈÏ£º$name" webdir
+echo -e "å®‰è£…ç›®å½•ï¼š${red} \nï¼ˆdockerç‰ˆç›´æ¥å›è½¦ï¼Œé»˜è®¤ç›®å½•$nameï¼‰\n"
+#read -p "ç›´æ¥å›è½¦ï¼Œaptç­‰æ–¹å¼å®‰è£…çš„è‡ªå·±æŸ¥æ‰¾ç›®å½•è¾“å…¥${plain}" webdir
+read -p "è¾“å…¥ç›®å½•å dockerç‰ˆç•™ç©ºé»˜è®¤å³å¯ï¼š$name" webdir
 
     if [[ ! -n "$webdir" ]]; then
         webdir=$name
@@ -22,7 +22,7 @@ read -p "ÊäÈëÄ¿Â¼Ãû Áô¿ÕÄ¬ÈÏ£º$name" webdir
 cp -rf  sdkjs-plugins $webdir
 
     if [[ ! -n "$webdir/sdkjs-plugins/README.md" ]]; then
-        echo "${red}ºº»¯³É¹¦£¬Çå¿Õä¯ÀÀÆ÷»º´æ¼´¿É¿´µ½onlyoffice²å¼şÊÇÖĞÎÄµ½ÁË"
+        echo "${red}æ±‰åŒ–æˆåŠŸï¼Œæ¸…ç©ºæµè§ˆå™¨ç¼“å­˜å³å¯çœ‹åˆ°onlyofficeæ’ä»¶æ˜¯ä¸­æ–‡åˆ°äº†"
     else
-       echo "Í´¿Ş£¬ºº»¯Ê§°ÜÁË${plain}"
+       echo "ç—›å“­ï¼Œæ±‰åŒ–å¤±è´¥äº†${plain}"
     fi
