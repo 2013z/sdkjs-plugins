@@ -6,7 +6,7 @@ plain='\033[0m'
 dir=/var/www/onlyoffice/documentserver
 [[ $EUID -ne 0 ]] && echo -e "${red}错误: ${plain} 必须使用root用户运行此脚本！\n" && exit 1
 
-cd /opt
+#cd /opt
 
 curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz
     if [[ ! -n "sdkjs-plugins-sdkjs-plugins" ]]; then
