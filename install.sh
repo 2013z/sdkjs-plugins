@@ -4,14 +4,17 @@ plain='\033[0m'
 
 #默认安装目录
 dir=/var/www/onlyoffice/documentserver
+
 [[ $EUID -ne 0 ]] && echo -e "${red}错误: ${plain} 必须使用root用户运行此脚本！\n" && exit 1
 
 cd /opt
 
 curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz
+
     if [[ ! -n "sdkjs-plugins-sdkjs-plugins" ]]; then
-    echo "下载汉化文件失败，请检查网络"
+    echo "${red}下载汉化文件失败，请检查网络"
     fi
+    
 #    exit 1
 #mv sdkjs-plugins-sdkjs-plugins sdkjs-plugins
 #echo -e "输入汉化文件安装目录：${red} \n（docker版直接回车，默认目录$dir）\n"
