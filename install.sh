@@ -2,22 +2,18 @@
 
 red='\033[0;31m'
 plain='\033[0m'
-#ÄÚÍøipµØÖ·»ñÈ¡
-ip=$(ifconfig | grep "inet addr" | awk '{ print $2}' | awk -F: '{print $2}' | awk 'NR==1')
-if [[ ! -n "$ip" ]]; then
-    ip="ÄãµÄÂ·ÓÉÆ÷IP"
-fi
-#Ä¬ÈÏ°²×°Ä¿Â¼/var/www/onlyoffice/documentserver
+
+#é»˜è®¤å®‰è£…ç›®å½•/var/www/onlyoffice/documentserver
 name=/var/www/onlyoffice/documentserver
 
 clear
 # check root
-[[ $EUID -ne 0 ]] && echo -e "${red}´íÎó: ${plain} ±ØĞëÊ¹ÓÃrootÓÃ»§ÔËĞĞ´Ë½Å±¾£¡\n" && exit 1
+[[ $EUID -ne 0 ]] && echo -e "${red}é”™è¯¯: ${plain} å¿…é¡»ä½¿ç”¨rootç”¨æˆ·è¿è¡Œæ­¤è„šæœ¬ï¼\n" && exit 1
 
 cd /opt
 
-echo -e "ÊäÈëºº»¯ÎÄ¼ş°²×°Ä¿Â¼\n"
-read -p "ÊäÈëÄ¿Â¼Ãû£¨Áô¿ÕÄ¬ÈÏ£º$name£©: " webdir
+echo -e "è¾“å…¥æ±‰åŒ–æ–‡ä»¶å®‰è£…ç›®å½•\n"
+read -p "è¾“å…¥ç›®å½•åï¼ˆç•™ç©ºé»˜è®¤ï¼š$nameï¼‰: " webdir
 echo -e "${plain}"
     if [[ ! -n "$webdir" ]]; then
         webdir=$name
