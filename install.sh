@@ -7,9 +7,9 @@ cd $down
 curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz       
 mv sdkjs-plugins-sdkjs-plugins sdkjs-plugins
 echo -e "安装目录,docker版直接回车，默认目录$name\n"
-#read -p "直接回车，apt等方式安装的自己查找目录输入${plain}" webdir
-read -p "输入目录名 docker版留空默认即可：$name\n" webdir
-    if [[ ! -n "$webdir" ]] ; then
+read -p "输入目录名（留空默认：$name）: " webdir
+#echo -e "${plain}"
+    if [[ ! -n "$webdir" ]]; then
         webdir=$name
     fi
 cp -rf  sdkjs-plugins $webdir
