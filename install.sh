@@ -2,18 +2,19 @@
 red='\033[0;31m'
 plain='\033[0m'
 
-#Ä¬ÈÏ°²×°Ä¿Â¼
+#é»˜è®¤å®‰è£…ç›®å½•
 dir=/var/www/onlyoffice/documentserver
 
 cd /opt
 
 curl -sSL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz
     if [[ ! -n "sdkjs-plugins-sdkjs-plugins" ]]; then
-    echo "ÏÂÔØºº»¯ÎÄ¼şÊ§°Ü£¬Çë¼ì²éÍøÂç" && exit 1
+    echo "ä¸‹è½½æ±‰åŒ–æ–‡ä»¶å¤±è´¥ï¼Œè¯·æ£€æŸ¥ç½‘ç»œ"
     fi
+    exit 1
 mv sdkjs-plugins-sdkjs-plugins sdkjs-plugins
-echo -e "ÊäÈëºº»¯ÎÄ¼ş°²×°Ä¿Â¼£º${red} \n£¨docker°æÖ±½Ó»Ø³µ£¬Ä¬ÈÏÄ¿Â¼$dir£©\n"
-read -p "Ö±½Ó»Ø³µ£¬aptµÈ·½Ê½°²×°µÄ×Ô¼º²éÕÒÄ¿Â¼ÊäÈë" webdir
+echo -e "è¾“å…¥æ±‰åŒ–æ–‡ä»¶å®‰è£…ç›®å½•ï¼š${red} \nï¼ˆdockerç‰ˆç›´æ¥å›è½¦ï¼Œé»˜è®¤ç›®å½•$dirï¼‰\n"
+read -p "ç›´æ¥å›è½¦ï¼Œaptç­‰æ–¹å¼å®‰è£…çš„è‡ªå·±æŸ¥æ‰¾ç›®å½•è¾“å…¥" webdir
 echo -e "${red}"
     if [[ ! -n "$webdir" ]]; then
         webdir=$dir
@@ -22,7 +23,7 @@ cp -rf  sdkjs-plugins $webdir
 
 echo -e "${plain}"
     if [[ ! -n "$webdir/sdkjs-plugins/README.md" ]]; then
-        echo "${red}ºº»¯³É¹¦£¬Çå¿Õä¯ÀÀÆ÷»º´æ¼´¿É¿´µ½onlyoffice²å¼şÊÇÖĞÎÄµ½ÁË"
+        echo "${red}æ±‰åŒ–æˆåŠŸï¼Œæ¸…ç©ºæµè§ˆå™¨ç¼“å­˜å³å¯çœ‹åˆ°onlyofficeæ’ä»¶æ˜¯ä¸­æ–‡åˆ°äº†"
     else
-        echo "Í´¿Ş£¬ºº»¯Ê§°ÜÁË${plain}"
+        echo "ç—›å“­ï¼Œæ±‰åŒ–å¤±è´¥äº†${plain}"
     fi
