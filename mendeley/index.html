@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mendeley</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="resources/css/plugin_style.css">
+    <link rel="stylesheet" href="../v1/plugins.css">
+    <script type="text/javascript" src="../v1/plugins.js"></script>
+    <script type="text/javascript" src="../v1/plugins-ui.js"></script>
+    <script src="scripts/thirdparty/fetch.umd.js"></script>
+    <script src="scripts/thirdparty/promise-polyfill.min.js"></script>
+    <script src="scripts/thirdparty/url-polyfill.min.js"></script>
+    <script src="scripts/mendeley-sdk/standalone.min.js"></script>
+    <script src="scripts/citeproc/citeproc_commonjs.js"></script>
+</head>
+<body spellcheck="false" class="noselect">
+    <div id="loader" class="cssload-container display-none">
+        <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div id="errorWrapper" class="errorMsg display-none defaultlable"></div>
+
+    <div id="content">
+
+        <div id="mainCont" class="flexCol">
+
+            <div id="configState" class="display-none">
+                <div><span class="i18n">要使用Mendeley，请将此编辑器注册为应用程序。复制链接并将其作为重定向URL插入将打开的表单中。</span> <a target="_blank" href="https://github.com/ONLYOFFICE/plugin-mendeley/tree/master#configuration" class="link i18n">点这里了解更多。</a></div>
+                <input id="redirectConfig" readonly class="mrtop control text wide form-control" />
+                <div id="redirectUrlCopy" class="button wide control i18n btn-text-default">复制链接并打开表单</div>
+                <div class="i18n">在表单中，输入任何应用程序名称和描述，接受条款和条件并生成一个秘钥。 在下面输入应用程序 ID 并保存它。</div>
+                <div class="mrtop label">
+                    <span class="i18n">应用程序 ID</span>
+                    <input id="appIdField" autocomplete="off" class="control text wide i18n form-control" type="text" placeholder="Application ID" />
+                </div>
+                <div id="saveConfigBtn" class="button wide control i18n btn-text-default">保存</div>
+            </div>
+
+            <div id="loginState" class="display-none">
+                <span class="i18n">此插件可帮助您在自己的库中按作者、标题或年份搜索参考资料</span>
+                <div id="loginBtn" class="button wide control i18n btn-text-default">登陆</div>
+                <div id="reconfigBtn" class="button wide control i18n btn-text-default">重新配置</div>
+            </div>
+
+            <div id="mainState" class="flexCol flexSize display-none">
+                <div id="selectedWrapper">
+                    <div class="flexCol flexSize flexCenter">
+                        <div id="selectedHolder"></div>
+                    </div>
+                    <div id="selectedThumb" class="scrollThumb display-none"></div>
+                </div>
+                <label id="searchLabel">
+                    <input id="searchField" autocomplete="off" class="control text i18n form-control" type="text" placeholder="Search references by author, title or year" />
+                    <span id="searchClear" class="display-none">&#xd7;</span>
+                </label>
+                <div id="docsWrapper" class="flexSize">
+                    <div class="flexCol flexSize">
+                        <div id="docsHolder" class="flexCol"></div>
+                        <div class="flex flexCenter">
+                            <div id="libLoader" class="cssload-loading display-none"><i></i><i></i><i></i><i></i></div>
+                        </div>
+                    </div>
+                    <div id="docsThumb" class="scrollThumb display-none"></div>
+                </div>
+                <div id="controlsHolder" class="flexCol">
+                    <div id="buttonsWrapper" class="flex display-none">
+                        <div id="insertBibBtn" class="button control i18n btn-text-default">插入参考目录</div>
+                        <div id="insertLinkBtn" class="button control i18n btn-text-default">插入链接</div>
+                        <div id="cancelBtn" class="button control i18n btn-text-default">取消</div>
+                    </div>
+                    <div id="styleWrapper">
+                        <div class="label">
+                            <span class="defaultlable">样式</span>
+                            <div class="selectHolder">
+                                <input id="styleSelect" class="control select form-control" type="text" placeholder="Enter style name">
+                                <div id="styleSelectList" class="selectList display-none form-control">
+                                </div>
+                                <div id="styleSelectedListOther" class="selectList display-none form-control"></div>
+                            </div>
+                        </div>
+                        <div class="label">
+                            <span class="defaultlable">语言</span>
+                            <div class="selectHolder">
+                                <input id="styleLang" readonly class="control select form-control" type="text">
+                                <div id="styleLangList" class="selectList display-none form-control">
+                                    <span data-value="af-ZA">南非荷兰语</span>
+                                    <span data-value="ar">阿拉伯语</span>
+                                    <span data-value="bg-BG">保加利亚语</span>
+                                    <span data-value="ca-AD">加泰罗尼亚语</span>
+                                    <span data-value="cs-CZ">捷克语</span>
+                                    <span data-value="cy-GB">威尔士语</span>
+                                    <span data-value="da-DK">丹麦语</span>
+                                    <span data-value="de-AT">德语（奥地利）</span>
+                                    <span data-value="de-CH">德语（瑞士）</span>
+                                    <span data-value="de-DE">德语（德国）</span>
+                                    <span data-value="el-GR">希腊语</span>
+                                    <span data-value="en-GB">英语（英国）</span>
+                                    <span data-value="en-US">英语（美国）</span>
+                                    <span data-value="es-CL">西班牙语（智利）</span>
+                                    <span data-value="es-ES">西班牙语（西班牙）</span>
+                                    <span data-value="es-MX">西班牙语（墨西哥）</span>
+                                    <span data-value="et-EE">爱沙尼亚语</span>
+                                    <span data-value="eu">巴斯克语</span>
+                                    <span data-value="fa-IR">波斯语</span>
+                                    <span data-value="fi-FI">芬兰语</span>
+                                    <span data-value="fr-CA">法语（加拿大）</span>
+                                    <span data-value="fr-FR">法语（法国）</span>
+                                    <span data-value="he-IL">希伯来语</span>
+                                    <span data-value="hr-HR">克罗地亚语</span>
+                                    <span data-value="hu-HU">匈牙利语</span>
+                                    <span data-value="id-ID">印度尼西亚语</span>
+                                    <span data-value="is-IS">冰岛语</span>
+                                    <span data-value="it-IT">意大利语</span>
+                                    <span data-value="ja-JP">日语</span>
+                                    <span data-value="km-KH">高棉语</span>
+                                    <span data-value="ko-KR">韩语</span>
+                                    <span data-value="la">拉丁文</span>
+                                    <span data-value="lt-LT">立陶宛语</span>
+                                    <span data-value="lv-LV">拉脱维亚语</span>
+                                    <span data-value="mn-MN">蒙古语</span>
+                                    <span data-value="nb-NO">挪威语（博克马尔语）</span>
+                                    <span data-value="nl-NL">荷兰语</span>
+                                    <span data-value="nn-NO">挪威语（尼诺斯克）</span>
+                                    <span data-value="pl-PL">波兰语</span>
+                                    <span data-value="pt-BR">葡萄牙语（巴西）</span>
+                                    <span data-value="pt-PT">葡萄牙语（葡萄牙）</span>
+                                    <span data-value="ro-RO">罗马尼亚语</span>
+                                    <span data-value="ru-RU">俄语</span>
+                                    <span data-value="sk-SK">斯洛伐克语</span>
+                                    <span data-value="sl-SI">斯洛文尼亚语</span>
+                                    <span data-value="sr-RS">塞尔维亚语</span>
+                                    <span data-value="sv-SE">瑞典语</span>
+                                    <span data-value="th-TH">泰语</span>
+                                    <span data-value="tr-TR">土耳其语</span>
+                                    <span data-value="uk-UA">乌克兰语</span>
+                                    <span data-value="vi-VN">越南语</span>
+                                    <span selected data-value="zh-CN">中文（中国）</span>
+                                    <span data-value="zh-TW">中文（台湾）</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="footerCont">
+            <span><a href="https://mendeley.com/" target="_blank" class="link i18n">打开Mendeley网站</a></span>
+            <span id="logoutLink" class="link display-none i18n defaultlable">注销</span>
+        </div>
+
+    </div>
+
+    <script src="scripts/code.js"></script>
+</body>
+</html>

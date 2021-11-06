@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>synonim</title>		
+		<script type="text/javascript" src="../v1/plugins.js"></script>
+		<script type="text/javascript" src="../v1/plugins-ui.js"></script>
+		<link rel="stylesheet" href="../v1/plugins.css">
+		
+		<script src="vendor/jQuery-2.2.2-min/jquery-v2.2.2-min.js"></script>
+		<script src="scripts/synonim.js"></script>
+		<link rel="stylesheet" href="resources/css/plugin_style.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	</head>
+	<body class='body'>
+		<div id="synonimresult_id" class = "input-field">
+			<input type="text" class = "input-synonim input-white form-control" name="q" id = "inp_search" placeholder="Search" autocomplete="off">
+			<button class = "btn-text-default" style="max-width: 50px;" id ="btn_search">Lookup</button>
+			<button class = "btn-text-default" style="max-width: 50px;" id="btn_showApiKey">ApiKey</button>
+		</div>
+		<div id="div_ApiKey" style="display: none; padding-top: 10px;">
+			<div class = "input-field">
+				<input type="text" class = "input-synonim input-white form-control" title="Enter your ApiKey" name="ApiKey" id = "inp_ApiKey" autocomplete="off">
+				<button class = "btn-text-default" id ="btn_enterApiKey">Ok</button>
+			</div>
+		</div>
+		<div id="scrollable-container-id" class='content-items'>
+			<div id = "global" class="global defaultlable"></div>
+		</div>		
+	</body>
+</html>

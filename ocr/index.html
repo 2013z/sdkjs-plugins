@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>OCR</title>
+    <script src='vendor/jQuery-2.2.2-min/jquery-v2.2.2-min.js'></script>
+    <link rel="stylesheet" href="vendor/select2-4.0.6-rc.1/dist/css/select2.css"/>
+    <script src="vendor/select2-4.0.6-rc.1/dist/js/select2.js"></script>
+    <script type="text/javascript" src="../v1/plugins.js"></script>
+	<script type="text/javascript" src="../v1/plugins-ui.js"></script>
+	<link rel="stylesheet" href="../v1/plugins.css">
+    <script type='text/javascript' src='scripts/ocr.js'></script>
+    <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.7/dist/tesseract.js'></script>
+
+</head>
+
+<style>
+    div{
+        display: inline-block;
+        vertical-align: top;
+    }
+    html{
+        height: 100%;
+    }
+    button{
+        width: 125px;
+    }
+
+    #lang-select {
+        background: #fff;
+        border: 1px solid #cfcfcf;
+        border-radius: 2px;
+        color: #444444;
+        font-size: 11px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        height: 22px;
+        cursor: pointer;
+    }
+
+    #lang-select[disabled],
+    #lang-select.disabled {
+        opacity: 0.65;
+    }
+
+</style>
+<body style="box-sizing:border-box; width: 100%; height: 100%; margin: 0; padding-left: 22px;">
+    <div style="height: 100%; width: 100%">
+        <div style="height: 99px" class="noselect">
+            <label class="defaultlable" style="display: inline-block; margin-top: 15px; margin-bottom: 22px" id="label1">Tesseract.js 可以识别(png, jpg)图片中的文本</label><br class="noselect">
+            <div class="noselect">
+                <div style="margin-right: 0px; width: 175px; overflow: visible;">
+                    <button class="btn-text-default" id="load-file-button-id">上传图片</button><br class="noselect">
+                    <label disabled  class="defaultlable" style="overflow-x: visible" id="file-name-label"></label>
+                    <input style="display: none" type="file" id="images-input" multiple accept='image/jpeg,image/png' />
+                </div>
+            </div>
+            <div class="noselect" style="margin-right: 22px">
+                <label class="defaultlable" id="label2">选择语言</label>
+                <select name = 'lang_combo' disabled  class="noselect" id='lang-select' style="width: 125px">
+                    <option value = 'chi_sim'>中文</option>
+                    <option value = 'eng'>英语</option>
+                    <option value = 'rus'>俄语</option>
+                    <option value = 'meme'>Meme</option>
+                    <option value = 'tha'>泰语</option>
+                    <option value = 'deu'>德语</option>
+                    <option value = 'jpn'>日语</option>
+                    <option value = 'spa'>西班牙语</option>
+                    <option value = 'fra'>法语</option>
+                    <option value = 'por'>葡萄牙语</option>
+                    <option value = 'ita'>意大利语</option>
+                    <option value = 'pol'>波兰语</option>
+                    <option value = 'tur'>土耳其语</option>
+                    <option value = 'nld'>荷兰语</option>
+                    <option value = 'ara'>阿拉伯语</option>
+                    <option value = 'ces'>捷克语</option>
+                    <option value = 'kor'>韩文</option>
+                    <option value = 'swe'>瑞典语</option>
+                    <option value = 'vie'>越南语</option>
+                    <option value = 'ron'>罗马尼亚语</option>
+                    <option value = 'ell'>希腊语</option>
+                    <option value = 'ind'>印度尼西亚语</option>
+                    <option value = 'hun'>匈牙利语</option>
+                    <option value = 'dan'>丹麦语</option>
+                    <option value = 'bul'>保加利亚语</option>
+                    <option value = 'fin'>芬兰语</option>
+                    <option value = 'nor'>挪威语</option>
+                    <option value = 'ukr'>乌克兰语</option>
+                    <option value = 'cat'>加泰罗尼亚语</option>
+                    <option value = 'hrv'>克罗地亚语</option>
+                    <option value = 'heb'>希伯来语</option>
+                    <option value = 'lit'>立陶宛语</option>
+                    <option value = 'slv'>斯洛文尼亚语</option>
+                    <option value = 'hin'>印地语</option>
+                    <option value = 'ben'>孟加拉语</option>
+                    <option value = 'tel'>泰卢固语</option>
+                    <option value = 'tam'>泰米尔语</option>
+                    <option value = 'kan'>卡纳达语</option>
+                    <option value = 'mal'>马拉雅拉姆语</option>
+                    <option value = 'tgl'>他加禄语</option>
+                    <option value = 'swa'>斯瓦希里语</option>
+                    <option value = 'aze'>阿塞拜疆语</option>
+                    <option value = 'bel'>白俄罗斯语</option>
+                    <option value = 'afr'>南非荷兰语</option>
+                    <option value = 'sqi'>阿尔巴尼亚语</option>
+                    <option value = 'eus'>巴斯克语</option>
+                    <option value = 'epo'>世界语</option>
+                    <option value = 'est'>爱沙尼亚语</option>
+                    <option value = 'glg'>加利西亚语</option>
+                    <option value = 'isl'>冰岛语</option>
+                    <option value = 'lav'>拉脱维亚语</option>
+                    <option value = 'mkd'>马其顿语</option>
+                    <option value = 'msa'>马来语</option>
+                    <option value = 'mlt'>马耳他语</option>
+                    <option value = 'grc'>古希腊语</option>
+                    <option value = 'chr'>切诺基</option>
+                    <option value = 'enm'>英文（旧）</option>
+                    <option value = 'frk'>法兰克</option>
+                    <option value = 'equ'>数学</option>
+                    <option value = 'srp'>塞尔维亚语（拉丁语）</option>
+                    <option value = 'slk'>斯洛伐克语</option>
+                </select>
+            </div>
+            <div  class="noselect">
+                <button class="btn-text-default" id='recognize-button' disabled>识别</button><br class="noselect">
+                <label id="status-label" class="defaultlable" disabled ></label>
+            </div>
+        </div>
+        <div id="scrollable-image-text-div" style="position:absolute; display: none; height: calc(100% - 99px); width: calc(100% - 5px); position: relative; overflow: hidden">
+            <div style="width: calc(50% - 20px); margin-right: 25px" id="image-container-div" class="noselect">
+
+            </div>
+            <div id="text-container-div" style="width: calc(50% - 20px); -khtml-user-select: text; user-select: text; -moz-user-select: text; -webkit-user-select: text;" class="defaultlable" style="width: calc(50% - 24px)">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
