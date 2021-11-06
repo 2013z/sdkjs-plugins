@@ -9,6 +9,7 @@ curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.t
 mv sdkjs-plugins-sdkjs-plugins sdkjs-plugins
 echo -e "输入汉化文件安装目录：${red} \n（docker版直接回车，默认目录$dir）\n"
 read -p "直接回车，apt等方式安装的自己查找目录输入${plain}" webdir
+    echo -e "$(plain)"
     if [[ ! -n "$webdir" ]]; then
         webdir=$dir
     fi
