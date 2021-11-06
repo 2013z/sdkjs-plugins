@@ -8,7 +8,7 @@ dir=/var/www/onlyoffice/documentserver
 
 cd /opt
 
-curl -sSL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz
+curl -sL https://github.com/eysp/sdkjs-plugins/archive/refs/tags/sdkjs-plugins.tar.gz | tar xz
     if [[ ! -n "sdkjs-plugins-sdkjs-plugins" ]]; then
     echo "下载汉化文件失败，请检查网络"
     fi
